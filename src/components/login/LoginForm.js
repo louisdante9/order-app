@@ -8,7 +8,6 @@ const LoginForm = ({ history }) => {
   const [password, setPassword] = useState();
   const dispatch = useDispatch();
 
-
   const handleSubmit = async e => {
     e.preventDefault();
 
