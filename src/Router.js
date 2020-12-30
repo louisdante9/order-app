@@ -3,18 +3,20 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  // Redirect
+  Redirect
 } from "react-router-dom";
 import LoginPage from './components/login/LoginPage';
+import OrdersPage from './components/orders/OrdersPage';
 import { Auth } from './helpers/auth';
 
 const Routes = () => (
   <Router>
     <Switch>
       <Route path="/login" component={Auth(LoginPage)} />
-      {/*<Redirect to="/login" />*/}
+      <Route path="/orders" component={Auth(OrdersPage)} />
+      <Redirect to="/orders" />
     </Switch>
   </Router>
 );
 
-export default Routes
+export default Routes;

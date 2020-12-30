@@ -31,6 +31,13 @@ export const Auth = (Component) => (props) => {
   return (<Component {...props} />)
 }
 
+export const getAuthHeader = () => ({
+  headers: {
+    'x-access-token': localStorage.getItem('token'),
+    authorization: localStorage.getItem('token')
+  }
+});
+
 export const logout = async () => {
   await auth.signOut()
   store.dispatch({ type: 'USER_LOGGEDIN', payload: { loggedIn: false } });

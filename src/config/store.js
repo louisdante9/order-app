@@ -3,13 +3,7 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from '../reducers';
 
-const initialState = {
-  user: {},
-  isLoggedIn: false,
-  orders: [],
-  order: {},
-  error: {}
-};
+const initialState = {};
 
 const store = createStore(
   reducers,
