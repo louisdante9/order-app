@@ -7,10 +7,10 @@ export const verifyLogin = () => {
     try{
       const idToken = await user.getIdToken();
       localStorage.setItem('token', idToken);
-      store.dispatch({ type: 'USER_LOGGEDIN', payload: { loggedIn: true } });
+      store.dispatch({ type: 'USER_LOGGEDIN', payload: true });
       store.dispatch({ type: 'USER_LOGIN', payload: user });
     } catch (error) {
-      store.dispatch({ type: 'USER_LOGGEDIN', payload: { loggedIn: false } });
+      store.dispatch({ type: 'USER_LOGGEDIN', payload:  false });
       store.dispatch({ type: 'USER_LOGIN', payload: {}});
       localStorage.removeItem('token');
     }
@@ -40,7 +40,7 @@ export const getAuthHeader = () => ({
 
 export const logout = async () => {
   await auth.signOut()
-  store.dispatch({ type: 'USER_LOGGEDIN', payload: { loggedIn: false } });
+  store.dispatch({ type: 'USER_LOGGEDIN', payload: false });
   store.dispatch({ type: 'USER_LOGIN', payload: {}});
   localStorage.removeItem('token');
 }

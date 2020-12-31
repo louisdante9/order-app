@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import auth from '../config/firebase'
 
 /**
@@ -51,9 +50,11 @@ export const loginError = (error) => {
  * @return {Object} action dispatch by the action creator
  */
 export const logOut = (history) => {
-  return dispatch => {
+  return async dispatch => {
+    await auth.signOut()
     window.localStorage.removeItem('token');
     dispatch(userLoggedIn(false));
+    dispatch({ type: 'USER_LOGIN', payload: {}});
     history.push('/login');
   }
 }
