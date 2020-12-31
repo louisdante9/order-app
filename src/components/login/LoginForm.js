@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import './login.css'
-import { login } from "../../actions/loginAction";
+import { login, loginError } from "../../actions/loginAction";
 
 const LoginForm = ({ history }) => {
   const [email, setUserEmail] = useState();
+  const error = useSelector(({ userReducer }) => userReducer.error);
   const [password, setPassword] = useState();
   const dispatch = useDispatch();
+  const [loginError, setLoginError] = useState('');
+
+  useEffect(() => {
+    if(error) {
+      setLoginError(error.message)
+    }
+  }, [error])
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -62,6 +70,9 @@ const LoginForm = ({ history }) => {
             name="submit"
           />
           <a href="http://localhost:3000" className="vertify-order">Don't have an account? Register</a>
+          {
+            loginError && <span className="text-danger">* {loginError}</span>
+          }
         </div>
       </form>
     </div>

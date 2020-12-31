@@ -8,7 +8,6 @@ const Header = (props) => {
   const isLoggedIn = useSelector(({ userReducer }) => userReducer.isLoggedIn);
 
   const handleLogout = () => {
-    console.log(isLoggedIn, props.history);
     dispatch(logOut(props.history));
   }
   return (
