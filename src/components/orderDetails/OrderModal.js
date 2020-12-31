@@ -1,25 +1,23 @@
 import React, { createRef, useEffect, useState } from 'react';
 import moment from "moment";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { updateOrder } from '../../actions/ordersAction'
 
-const OrderModal = ({ order }) => {
+const OrderModal = (props) => {
+  const order = useSelector(({ ordersReducer }) => ordersReducer.order);
   const [date, setDate] = useState();
+  const [fieldTitle, setFieldTitlee] = useState();
   const title = createRef()
   const bookingDate = createRef()
   const dispatch = useDispatch();
 
   useEffect(() => {
     setDate(moment.unix(order.bookingDate / 1000).format('YYYY-MM-DD'))
+    setFieldTitlee(order.title);
   }, [order.bookingDate]);
 
   const handleSubmit = (event) => {
     event.preventDefault()
-
-    console.log({
-      title: title.current.value,
-      bookingDate: bookingDate.current.value,
-    });
 
     dispatch(updateOrder({
       uid: order.uid,
@@ -45,7 +43,7 @@ const OrderModal = ({ order }) => {
                     type="text"
                     className="form-control"
                     id="title"
-                    defaultValue={ order.title } />
+                    defaultValue={ fieldTitle } />
                 </div>
                 <div className="form-group">
                   <label
